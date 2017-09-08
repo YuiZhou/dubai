@@ -22,6 +22,14 @@ class Finance {
   static getCurrency(index) {
    return Finance.currency[index].name;
   }
+
+  static getAllCurrencyName() {
+    var result = [];
+    for (var i = 0; i < Finance.currency.length; i++) {
+      result.push(Finance.currency[i].name);
+    }
+    return result;
+  }
 }
 
 export default Finance;

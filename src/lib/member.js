@@ -2,8 +2,10 @@ class Member {
   static member = ['JESS', 'AnB', '小弟'];
 
   static getMember(index) {
-    if (index < 0 || index > this.member.length) {return this.member;}
-    return this.member[index];
+    if (index === undefined || index < 0 || index > Member.member.length) {
+      return Member.member;
+    }
+    return Member.member[index];
   }
 }
 

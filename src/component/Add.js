@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { FormControl, Button, ButtonToolbar, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import Member from '../lib/member.js';
+import Finance from '../lib/finance.js';
+
 import '../index.css';
 
 class Add extends Component {
@@ -37,6 +40,9 @@ class Add extends Component {
     return yyyy + '-' + mm + '-' + dd;
   }
   render() {
+    const members = Member.getMember();
+    const currency = Finance.getAllCurrencyName();
+    console.log(members);
     return (
       <div className="add container">
         <h3>add an accounting???</h3>
@@ -48,10 +54,12 @@ class Add extends Component {
 
         <p>currency????</p>
         <ButtonToolbar>
-          <ToggleButtonGroup type="radio" ref="currency" name="currency" defaultValue={1}>
-            <ToggleButton value={1}>RMB</ToggleButton>
-            <ToggleButton value={2}>AED</ToggleButton>
-            <ToggleButton value={3}>USD</ToggleButton>
+          <ToggleButtonGroup type="radio" ref="currency" name="currency" defaultValue={0}>
+            {
+              currency.map(function(item, i) {
+                return (<ToggleButton value={i}>{item}</ToggleButton>);
+              })
+            }
           </ToggleButtonGroup>
         </ButtonToolbar>
 
@@ -60,10 +68,12 @@ class Add extends Component {
 
         <p>involve???</p>
         <ButtonToolbar>
-          <ToggleButtonGroup type="checkbox" defaultValue={[1, 2, 3]} ref="involve">
-            <ToggleButton value={1}>JESS</ToggleButton>
-            <ToggleButton value={2}>B</ToggleButton>
-            <ToggleButton value={3}>me</ToggleButton>
+          <ToggleButtonGroup type="checkbox" defaultValue={[0, 1, 2]} ref="involve">
+            {
+              members.map(function(item, i) {
+                return (<ToggleButton value={i}>{item}</ToggleButton>);
+              })
+            }
           </ToggleButtonGroup>
         </ButtonToolbar>
 
