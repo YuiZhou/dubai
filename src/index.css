@@ -13,3 +13,11 @@ body {
 .add-button {
   margin-top: 18px;
 }
+
+.finance-list span {
+ margin-right: 10px;
+}
+
+.finance-list p {
+  margin: 5px auto;
+}
