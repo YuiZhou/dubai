@@ -14,15 +14,13 @@ class Item extends Component {
 
   getValue() {
     return {
-      title: ReactDOM.findDOMNode(this.refs.title).value,
       number: ReactDOM.findDOMNode(this.refs.number).value,
       currency: ReactDOM.findDOMNode(this.refs.currency).value,
       date: ReactDOM.findDOMNode(this.refs.date).value,
       involve: ReactDOM.findDOMNode(this.refs.involve).value,
-      comment: ReactDOM.findDOMNode(this.refs.comment).value
+      spend: ReactDOM.findDOMNode(this.refs.spend).value,
     }
   }
-
 
   render() {
     const members = Member.getMember();
@@ -34,14 +32,12 @@ class Item extends Component {
       number,
       currency,
       date,
+      spend,
       involve,
-      comment,
       onSubmit
      } = this.props;
-    console.log(members);
     return (
       <div className="add container">
-        <h3>{header}</h3>
         <p>说明</p>
         <FormControl type="text" placeholder="说明" ref="title" defaultValue={title}/>
 
@@ -53,6 +49,17 @@ class Item extends Component {
           <ToggleButtonGroup type="radio" ref="currency" name="currency" defaultValue={currency}>
             {
               currencies.map(function(item, i) {
+                return (<ToggleButton value={i}>{item}</ToggleButton>);
+              })
+            }
+          </ToggleButtonGroup>
+        </ButtonToolbar>
+
+        <p>付款人</p>
+        <ButtonToolbar>
+          <ToggleButtonGroup type="radio" ref="spend" name="spend" defaultValue={spend}>
+            {
+              members.map(function(item, i) {
                 return (<ToggleButton value={i}>{item}</ToggleButton>);
               })
             }
@@ -73,9 +80,6 @@ class Item extends Component {
           </ToggleButtonGroup>
         </ButtonToolbar>
 
-        <p>备注</p>
-        <FormControl type="textarea" placeholder="备注" ref="comment" defaultValue={comment}/>
-
         <Button block bsStyle="primary" onClick={onSubmit} className="add-button">{button}</Button>
       </div>
     );
@@ -83,14 +87,13 @@ class Item extends Component {
 }
 
 Item.defaultProps  =  {
-    header: '新记账',
-    button: '添加',
+    button: '添加一笔记账',
     title: '',
     number: 0,
     currency: 0,
     date: Util.getDate(),
-    involve: [0, 1, 2],
-    comment: ''
+    spend: Member.getUser(),
+    involve: [0, 1, 2]
 };
 
 export default Item;

@@ -8,6 +8,7 @@ class FinanceList extends Component {
   constructor(props) {
     super(props);
     this.getItemInstance = this.getItemInstance.bind(this);
+    this.getMyCost = this.getMyCost.bind(this);
   }
 
   getItemInstance(item, i) {
@@ -28,9 +29,21 @@ class FinanceList extends Component {
         <ListGroupItem key={i} href={'./edit/' + JSON.stringify(item)}>
           <p><span className="bold">{item.title}</span><span className="pull-right">{item.date}</span></p>
           <p><span>{getNumber()} ({Finance.getRMB(item)}CNY)</span><span className="pull-right">参与者： {getMembers()}</span></p>
+          {this.getMyCost(item)}
         </ListGroupItem>
     );    
   }
+
+  getMyCost(item) {
+    var cost = Member.getMyCost(item, Finance.getRMB(item));
+    console.log(cost);
+    if (cost === 0) {
+      return;
+    } else {
+      return (<p className={cost > 0 ? 'text-success' : 'text-danger'}>{cost} CNY</p>);
+    }
+  }
+
 
   render() {
     const {list} = this.props;

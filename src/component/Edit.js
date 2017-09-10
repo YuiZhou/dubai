@@ -17,14 +17,13 @@ class Edit extends Component {
     const item = JSON.parse(this.props.match.params.item);
     return (
       <Item
-        header='编辑账单'
-        button="确定更改"
+        button="确定更改这一笔记账"
         title={item.title}
         number={item.number}
         currency={item.currency}
         date={item.date}
         involve={item.involve}
-        comment={item.comment}
+        spend={item.spend}
         onSumbit={this.submit} />
     );
   }
