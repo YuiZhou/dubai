@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Item from './Item';
+import Client from '../client/client.js';
 
 class Edit extends Component {
   constructor(props) {
@@ -9,8 +10,11 @@ class Edit extends Component {
   }
 
   submit(item) {
-    if (!item.title || !item.number || item.involve.length === 0) { return; }
-    // todo
+    console.log(JSON.stringify(item));
+    if (!item || !item.title || !item.number || item.involve.length === 0) { return; }
+    Client.editItem(item, function(res, err) {
+      window.location = '/';
+    });
   }
 
   render() {
@@ -18,13 +22,14 @@ class Edit extends Component {
     return (
       <Item
         button="确定更改这一笔记账"
+        id={item.id}
         title={item.title}
         number={item.number}
         currency={item.currency}
         date={item.date}
         involve={item.involve}
         spend={item.spend}
-        onSumbit={this.submit} />
+        onSubmit={this.submit} />
     );
   }
 

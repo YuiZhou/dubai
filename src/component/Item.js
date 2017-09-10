@@ -10,16 +10,34 @@ class Item extends Component {
   constructor(props) {
     super(props);
     this.getValue = this.getValue.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   getValue() {
-    return {
+    var item = {
+      id: this.props.id,
+      title: ReactDOM.findDOMNode(this.refs.title).value,
       number: ReactDOM.findDOMNode(this.refs.number).value,
       currency: ReactDOM.findDOMNode(this.refs.currency).value,
       date: ReactDOM.findDOMNode(this.refs.date).value,
       involve: ReactDOM.findDOMNode(this.refs.involve).value,
       spend: ReactDOM.findDOMNode(this.refs.spend).value,
     }
+console.log(JSON.stringify(item));
+    if (item.title === this.props.title &&
+        item.number === this.props.number &&
+        item.currency === this.props.currency &&
+        item.date === this.props.date &&
+        item.spend === this.props.spend &&
+        JSON.stringify(item.involve) === JSON.stringify(item.involve)) {
+      return;
+    }
+
+    return item;
+  }
+
+  submit() {
+    this.props.onSubmit(this.getValue());
   }
 
   render() {
@@ -33,8 +51,7 @@ class Item extends Component {
       currency,
       date,
       spend,
-      involve,
-      onSubmit
+      involve
      } = this.props;
     return (
       <div className="add container">
@@ -49,7 +66,7 @@ class Item extends Component {
           <ToggleButtonGroup type="radio" ref="currency" name="currency" defaultValue={currency}>
             {
               currencies.map(function(item, i) {
-                return (<ToggleButton value={i}>{item}</ToggleButton>);
+                return (<ToggleButton value={i} key={i}>{item}</ToggleButton>);
               })
             }
           </ToggleButtonGroup>
@@ -60,7 +77,7 @@ class Item extends Component {
           <ToggleButtonGroup type="radio" ref="spend" name="spend" defaultValue={spend}>
             {
               members.map(function(item, i) {
-                return (<ToggleButton value={i}>{item}</ToggleButton>);
+                return (<ToggleButton value={i} key={i}>{item}</ToggleButton>);
               })
             }
           </ToggleButtonGroup>
@@ -74,19 +91,20 @@ class Item extends Component {
           <ToggleButtonGroup type="checkbox" defaultValue={involve} ref="involve">
             {
               members.map(function(item, i) {
-                return (<ToggleButton value={i}>{item}</ToggleButton>);
+                return (<ToggleButton value={i} key={i}>{item}</ToggleButton>);
               })
             }
           </ToggleButtonGroup>
         </ButtonToolbar>
 
-        <Button block bsStyle="primary" onClick={onSubmit} className="add-button">{button}</Button>
+        <Button block bsStyle="primary" onClick={this.submit} className="add-button">{button}</Button>
       </div>
     );
   }
 }
 
 Item.defaultProps  =  {
+    id: 0,
     button: '添加一笔记账',
     title: '',
     number: 0,
