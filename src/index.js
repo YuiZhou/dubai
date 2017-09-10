@@ -10,6 +10,7 @@ import Home from './component/Home';
 import My from './component/My';
 import Add from './component/Add';
 import Summary from './component/Summary';
+import Edit from './component/Edit';
 
 ReactDOM.render(
 (<div>
@@ -19,6 +20,7 @@ ReactDOM.render(
       <Route path="/summary" component={Summary} />
       <Route path="/my" component={My} />
       <Route path="/add" component={Add} />
+      <Route path="/edit/:item" component={Edit}/>      
       <Route path="/" component={Home} />
     </Switch>
   </Router>

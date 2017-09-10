@@ -10,7 +10,7 @@ class FinanceList extends Component {
     this.getItemInstance = this.getItemInstance.bind(this);
   }
 
-  getItemInstance(item) {
+  getItemInstance(item, i) {
     function getNumber() {
       return item.number + ' ' + Finance.getCurrency(item.currency);
     }
@@ -20,15 +20,14 @@ class FinanceList extends Component {
       for (var i = 0; i < item.involve.length; i++) {
         members.push(Member.getMember(item.involve[i]));
       }
-      console.log(JSON.stringify(members));
       return members.join();
     }
 
     if (!item.title || !item.number || item.involve.length === 0) { return; }
     return (
-        <ListGroupItem header={item.title}>
-          <p><span>{getNumber()}</span><span>折合为人民币： {Finance.getRMB(item)}元</span></p>
-          <p>参与者有： {getMembers()}</p>
+        <ListGroupItem key={i} href={'./edit/' + JSON.stringify(item)}>
+          <p><span className="bold">{item.title}</span></p>
+          <p><span>{getNumber()} ({Finance.getRMB(item)}CNY)</span>&nbsp;&nbsp;参与者： {getMembers()}</p>
         </ListGroupItem>
     );    
   }
@@ -39,7 +38,7 @@ class FinanceList extends Component {
       <ListGroup className="finance-list">
         {
           list.map(function(item, i){
-            return this.getItemInstance(item);
+            return this.getItemInstance(item, i);
           }.bind(this))
         }
       </ListGroup>

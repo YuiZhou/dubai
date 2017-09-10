@@ -21,3 +21,11 @@ body {
 .finance-list p {
   margin: 5px auto;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+.navbar {
+  z-index: 9999;
+}

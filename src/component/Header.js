@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import {AutoAffix} from 'react-overlays';
 
 NavItem.prototype.handleClick = function handleClick(e) {
 };
@@ -7,10 +8,11 @@ NavItem.prototype.handleClick = function handleClick(e) {
 class Header extends Component {
   render() {
     return (
+      <AutoAffix viewportOffsetTop={0}>
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">JoJo Dubai</a>
+            <a href="">JoJo Dubai</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -23,6 +25,7 @@ class Header extends Component {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      </AutoAffix>
     );
   }
 }
