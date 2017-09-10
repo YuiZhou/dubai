@@ -26,8 +26,8 @@ class FinanceList extends Component {
     if (!item.title || !item.number || item.involve.length === 0) { return; }
     return (
         <ListGroupItem key={i} href={'./edit/' + JSON.stringify(item)}>
-          <p><span className="bold">{item.title}</span></p>
-          <p><span>{getNumber()} ({Finance.getRMB(item)}CNY)</span>&nbsp;&nbsp;参与者： {getMembers()}</p>
+          <p><span className="bold">{item.title}</span><span className="pull-right">{item.date}</span></p>
+          <p><span>{getNumber()} ({Finance.getRMB(item)}CNY)</span><span className="pull-right">参与者： {getMembers()}</span></p>
         </ListGroupItem>
     );    
   }
