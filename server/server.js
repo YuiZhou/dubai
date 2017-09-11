@@ -11,48 +11,39 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 app.use(bodyParser.json());
 
 app.get('/api/home', function (req, res) {
-  console.log('get all');
-  
   itemList.get(null, function (result, err) {
     res.send(result, err ? 500 : 200);
   });
 });
 
 app.get('/api/user/:userid', function (req, res) {
-  console.log('get me');
-  
-   itemList.get(req.params.userid, function (result, err) {
+  itemList.get(parseInt(req.params.userid, 10), function (result, err) {
     res.send(result, err ? 500 : 200);
   });
 });
 
 app.get('/api/summary', function (req, res) {
-  console.log('summary');
-  
-   itemList.summary(function (result, err) {
+  itemList.summary(function (result, err) {
     res.send(result, err ? 500 : 200);
   });
 });
 
 app.post('/api/new', function (req, res) {
-  console.log('new');
-  try{
-  itemList.add(req.body, function (result, err) {
-    res.send(result, err ? 500 : 200);
-  });
-  }catch(err) {
+  try {
+    itemList.add(req.body, function (result, err) {
+      res.send(result, err ? 500 : 200);
+    });
+  } catch (err) {
     res.send(err, 500);
   }
 });
 
 app.post('/api/edit', function (req, res) {
-  console.log('edit');
-  
-   try{
-  itemList.edit(req.body, function (result, err) {
-    res.send(result, err ? 500 : 200);
-  });
-  }catch(err) {
+  try {
+    itemList.edit(req.body, function (result, err) {
+      res.send(result, err ? 500 : 200);
+    });
+  } catch (err) {
     res.send(err, 500);
   }
 });

@@ -58,7 +58,7 @@ class Item extends Component {
         <FormControl type="text" placeholder="说明" ref="title" defaultValue={title}/>
 
         <p>数字</p>
-        <FormControl type="number" placeholder="数字" ref="number" defaultValue={number}/>
+        <FormControl type="number" placeholder="数字" ref="number" defaultValue={number === 0 ? null : number}/>
 
         <p>货币单位</p>
         <ButtonToolbar>

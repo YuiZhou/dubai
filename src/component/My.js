@@ -13,20 +13,22 @@ class My extends Component {
   }
 
   getData() {
-    Client.getMyIndex(function(res, err) {
+    Client.getMyIndex(function (res, err) {
       if (err) { return; }
 
-      this.setState(function() {
+      this.setState(function () {
         console.log(res)
-        return { list: res}
+        return { list: res }
       });
     }.bind(this));
   }
 
   render() {
-    const {list} = this.state;
+    const { list } = this.state;
     return (
-       <FinanceList list={list}/>
+      <div className="container">
+        <FinanceList list={list} />
+      </div>
     );
   }
 }

@@ -27,9 +27,9 @@ class FinanceList extends Component {
     if (!item.title || !item.number || item.involve.length === 0) { return; }
     return (
         <ListGroupItem key={i} href={'./edit/' + JSON.stringify(item)}>
-          <p><span className="bold">{item.title}</span><span className="pull-right">{item.date}</span></p>
+          <p>{this.getMyCost(item)}<span className="bold">{item.title}</span></p>
           <p><span>{getNumber()} ({Finance.getRMB(item)}CNY)</span><span className="pull-right">参与者： {getMembers()}</span></p>
-          {this.getMyCost(item)}
+          <p>{item.date}</p>
         </ListGroupItem>
     );    
   }
@@ -40,7 +40,7 @@ class FinanceList extends Component {
     if (cost === 0) {
       return;
     } else {
-      return (<p className={cost > 0 ? 'text-success' : 'text-danger'}>{cost} CNY</p>);
+      return (<span className={(cost > 0 ? 'text-success' : 'text-danger') + ' pull-right'}>{cost} CNY</span>);
     }
   }
 

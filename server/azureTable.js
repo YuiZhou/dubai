@@ -9,7 +9,7 @@ AzureTable.prototype.getAll = function (callback) {
   callback(this.list);
 }
 
-AzureTable.prototype.update = function (item, callback) {
+AzureTable.prototype.edit = function (item, callback) {
   for (var i = 0; i < this.list.length; i++) {
     if (this.list[i].id === item.id) {
       this.list.splice(i, 1, item);
