@@ -6,7 +6,6 @@ AzureTable.prototype.getAll = function (callback) {
   // this.tableService.queryEntities(this.tableName, new azure.TableQuery(), null, function(err, result, response) {
 
   // });
-  console.log('get list ' + JSON.stringify(this.list));
   callback(this.list);
 }
 

@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const ItemList = require('./itemList.js');
 
 const app = express();
@@ -7,6 +8,7 @@ var itemList = new ItemList();
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use(bodyParser.json());
 
 app.get('/api/home', function (req, res) {
   console.log('get all');
@@ -35,7 +37,7 @@ app.get('/api/summary', function (req, res) {
 app.post('/api/new', function (req, res) {
   console.log('new');
   try{
-  itemList.add(JSON.parse(req.body), function (result, err) {
+  itemList.add(req.body, function (result, err) {
     res.send(result, err ? 500 : 200);
   });
   }catch(err) {
@@ -47,7 +49,7 @@ app.post('/api/edit', function (req, res) {
   console.log('edit');
   
    try{
-  itemList.edit(JSON.parse(req.body), function (result, err) {
+  itemList.edit(req.body, function (result, err) {
     res.send(result, err ? 500 : 200);
   });
   }catch(err) {

@@ -1,4 +1,5 @@
 const AzureTable = require('./azureTable.js');
+const uuidv1 = require('uuid/v1');
 
 function ItemList() {
   this.list = undefined;
@@ -9,14 +10,14 @@ function ItemList() {
 }
 
 ItemList.prototype.get = function (user, callback) {
-  function filter(user) {
+  function filter(user, list) {
     if (!user) {
-      return this.list;
+      return list;
     }
 
     var result = [];
-    for (var i = 0; i < this.list.length; i++) {
-      var item = this.list[i];
+    for (var i = 0; i < list.length; i++) {
+      var item = list[i];
       if (item.spend === user || item.involve.indexOf(user) >= 0) {
         result.push(item);
       }
@@ -29,8 +30,9 @@ ItemList.prototype.get = function (user, callback) {
       callback(null, err);
       return;
     }
-    callback(filter(user));
-  });
+    var filtered = filter(user, this.list);
+    callback(filtered);
+  }.bind(this));
 }
 
 var getList = function (callback) {
@@ -59,6 +61,7 @@ var cleanup = function () {
 
 ItemList.prototype.add = function (item, callback) {
   cleanup();
+  item.id = uuidv1();
   this.table.create(item, callback);
 }
 

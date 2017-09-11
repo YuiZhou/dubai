@@ -9,7 +9,6 @@ class Edit extends Component {
   }
 
   submit(item) {
-    console.log(JSON.stringify(item));
     if (!item || !item.title || !item.number || item.involve.length === 0) { return; }
     Client.editItem(item, function(res, err) {
       window.location = '/';
