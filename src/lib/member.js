@@ -1,5 +1,5 @@
 class Member {
-  static member = ['JESS', 'AnB', '小弟'];
+  static member = require('../common/member.json');
 
   static getMember(index) {
     if (index === undefined || index < 0 || index > Member.member.length) {

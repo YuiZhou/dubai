@@ -1,0 +1,14 @@
+[
+    {
+      "name": "CNY",
+      "exchange": 1
+    },
+    {
+      "name": "AED",
+      "exchange": 1.8
+    },
+    {
+      "name": "USD",
+      "exchange": 6.45
+    }
+]

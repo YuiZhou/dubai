@@ -1,18 +1,5 @@
 class Finance {
-  static currency = [
-    {
-      name: 'CNY',
-      exchange: 1
-    },
-    {
-      name: 'AED',
-      exchange: 1.8
-    },
-    {
-      name: 'USD',
-      exchange: 6.45
-    },
-  ];
+  static currency = require('../common/finance.json');
 
   static getRMB(item) {
     if (item.currency < 0 || item.currency >= Finance.currency.length) {return;}
