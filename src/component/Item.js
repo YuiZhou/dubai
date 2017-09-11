@@ -18,18 +18,18 @@ class Item extends Component {
       id: this.props.id,
       title: ReactDOM.findDOMNode(this.refs.title).value,
       number: ReactDOM.findDOMNode(this.refs.number).value,
-      currency: ReactDOM.findDOMNode(this.refs.currency).value,
+      currency: this.refs.currency._values.value,
       date: ReactDOM.findDOMNode(this.refs.date).value,
-      involve: ReactDOM.findDOMNode(this.refs.involve).value,
-      spend: ReactDOM.findDOMNode(this.refs.spend).value,
+      involve: this.refs.involve._values.value,
+      spend: this.refs.spend._values.value,
     }
-console.log(JSON.stringify(item));
+
     if (item.title === this.props.title &&
         item.number === this.props.number &&
         item.currency === this.props.currency &&
         item.date === this.props.date &&
         item.spend === this.props.spend &&
-        JSON.stringify(item.involve) === JSON.stringify(item.involve)) {
+        JSON.stringify(item.involve) === JSON.stringify(this.props.involve)) {
       return;
     }
 
@@ -44,7 +44,6 @@ console.log(JSON.stringify(item));
     const members = Member.getMember();
     const currencies = Finance.getAllCurrencyName();
     const { 
-      header,
       button,
       title,
       number,

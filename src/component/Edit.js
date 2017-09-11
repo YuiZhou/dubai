@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Item from './Item';
 import Client from '../client/client.js';
 
