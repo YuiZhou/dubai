@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Item from './Item';
+import Client from '../client/client.js';
 
 class Add extends Component {
   constructor(props) {
@@ -9,7 +10,10 @@ class Add extends Component {
 
   submit(item) {
     if (!item.title || !item.number || item.involve.length === 0) { return; }
-  }
+    Client.newItem(item, function(res, err) {
+      window.location = '/';
+    });
+}
 
   render() {
    return (

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import Client from '../client/client.js';
 
 class Summary extends Component {
   constructor(props) {
@@ -13,20 +14,13 @@ class Summary extends Component {
   }
 
   getSummary() {
-    return [
-      {
-        name: 'Jess',
-        finance: -100
-      },
-      {
-        name: 'An B',
-        finance: 0
-      },
-      {
-        name: 'Me',
-        finance: 299
-      }
-    ];
+    Client.getSummary(function(res, err) {
+      if (err) { return; }
+
+      this.setState(function() {
+        return { summary: res }
+      });
+    }.bind(this));
   }
 
   getListStyle(number) {

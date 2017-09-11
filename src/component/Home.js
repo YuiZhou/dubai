@@ -19,7 +19,6 @@ class Home extends Component {
       if (err) { return; }
 
       this.setState(function() {
-        console.log(res)
         return { list: res}
       });
     }.bind(this));
