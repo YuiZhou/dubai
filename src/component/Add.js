@@ -19,7 +19,7 @@ class Add extends Component {
    return (
      <Item 
      header='新记一笔账'
-     onSumbit={this.submit}/>
+     onSubmit={this.submit}/>
    );
   }
 }
