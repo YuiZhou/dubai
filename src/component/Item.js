@@ -54,6 +54,7 @@ class Item extends Component {
      } = this.props;
     return (
       <div className="add container">
+        <h3>记一笔账</h3>
         <p>说明</p>
         <FormControl type="text" placeholder="说明" ref="title" defaultValue={title}/>
 
