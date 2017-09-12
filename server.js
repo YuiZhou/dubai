@@ -1,13 +1,13 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const ItemList = require('./itemList.js');
+const ItemList = require('./server/itemList.js');
 
 const app = express();
 var itemList = new ItemList();
 
 // Serve static assets
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use(express.static(path.resolve(__dirname, 'build')));
 app.use(bodyParser.json());
 
 app.get('/api/home', function (req, res) {
@@ -50,7 +50,7 @@ app.post('/api/edit', function (req, res) {
 
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', function (req, res) {
-  res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
 const PORT = process.env.PORT || 9000;
