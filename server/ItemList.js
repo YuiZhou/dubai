@@ -1,6 +1,9 @@
 const AzureTable = require('./azureTable.js');
 const uuidv1 = require('uuid/v1');
 
+const members = require('../src/common/member.json');
+const finance = require('../src/common/finance.json');
+
 function ItemList() {
   this.list = undefined;
   this.summary = undefined;
@@ -74,10 +77,29 @@ ItemList.prototype.computeSummary = function (callback) {
       callback(null, err);
     }
 
-    callback([]);
+    var result = [];
+    for (var i = 0; i < members.length; i++) {
+      result.push({
+        name: members[i],
+        finance: 0
+      });
+    }
 
-    // todo
-  });
+    const list = this.list;
+    for (var j = 0; j < list.length; j++) {
+      var item = list[j];
+      var totalCost = item.number * finance[item.currency].exchange;
+      result[item.spend].finance += totalCost;
+      var average = totalCost / item.involve.length;
+      for (var k = 0; k < members.length; k++) {
+        if (item.involve.indexOf(k) < 0) {continue;}
+        result[k].finance -= average;
+      }
+    }
+
+    callback(result);
+
+  }.bind(this));
 }
 
 module.exports = ItemList;

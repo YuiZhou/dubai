@@ -23,7 +23,6 @@ app.get('/api/user/:userid', function (req, res) {
 });
 
 app.get('/api/summary', function (req, res) {
-  console.log('summary');
   itemList.computeSummary(function (result, err) {
     res.send(result, err ? 500 : 200);
   });
