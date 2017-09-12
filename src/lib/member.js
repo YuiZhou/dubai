@@ -9,7 +9,15 @@ class Member {
   }
   
   static getUser() {
-    return 2;
+    return parseInt(localStorage.getItem('user'), 10);
+  }
+
+  static login(user, key) {
+    if (key !== 'joeytwins') {
+      throw 'password wrong'
+    }
+
+    localStorage.setItem('user', user);
   }
 
   static getMyCost(item, totalCost) {

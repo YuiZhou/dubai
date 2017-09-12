@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import BaseComponent from './BaseComponent.js';
 import FinanceList from './FinanceList';
 import {Button} from 'react-bootstrap';
 import Client from '../client/client.js';
 
-class Home extends Component {
+class Home extends BaseComponent {
 
   constructor(props) {
     super(props);

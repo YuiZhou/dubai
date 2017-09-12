@@ -11,6 +11,7 @@ import My from './component/My';
 import Add from './component/Add';
 import Summary from './component/Summary';
 import Edit from './component/Edit';
+import Login from './component/Login';
 
 ReactDOM.render(
 (<div>
@@ -21,6 +22,7 @@ ReactDOM.render(
       <Route path="/my" component={My} />
       <Route path="/add" component={Add} />
       <Route path="/edit/:item" component={Edit}/>      
+      <Route path="/login" component={Login}/>      
       <Route path="/" component={Home} />
     </Switch>
   </Router>

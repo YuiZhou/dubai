@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import BaseComponent from './BaseComponent.js';
 import Item from './Item';
 import Client from '../client/client.js';
 
-class Add extends Component {
+class Add extends BaseComponent {
   constructor(props) {
     super(props);
     this.submit = this.submit.bind(this);

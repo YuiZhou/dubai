@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import BaseComponent from './BaseComponent.js';
 import FinanceList from './FinanceList';
 import Client from '../client/client.js';
 
-class My extends Component {
+class My extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
