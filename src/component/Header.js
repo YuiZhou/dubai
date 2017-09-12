@@ -12,7 +12,7 @@ class Header extends Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="">JoJo Dubai</a>
+            <a href="">龙虎豹的粉丝去旅行</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
