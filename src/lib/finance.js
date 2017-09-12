@@ -10,6 +10,10 @@ class Finance {
    return Finance.currency[index].name;
   }
 
+  static getAllCurrency() {
+    return Finance.currency;
+  }
+
   static getAllCurrencyName() {
     var result = [];
     for (var i = 0; i < Finance.currency.length; i++) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import Client from '../client/client.js';
+import Finance from '../lib/finance.js';
 
 class Summary extends Component {
   constructor(props) {
@@ -36,11 +37,19 @@ class Summary extends Component {
 
   render() {
     const { summary } = this.state;
+    const currencies = Finance.getAllCurrency();
     return (
 
       <div className="summary container">
         <h3>账单清算</h3>
-        <p>按照汇率blablabla</p>
+        <p>按照汇率: </p>
+        <ListGroup>
+          {
+            currencies.map(function(x, i) {
+              return (<ListGroupItem key={i}>{x.name} = {x.exchange} CNY</ListGroupItem>);
+            });
+          }
+        </ListGroup>
         <br/>
         <br/>
         <ListGroup>
