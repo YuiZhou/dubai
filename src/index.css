@@ -29,3 +29,7 @@ body {
 .navbar {
   z-index: 9999;
 }
+
+.list-group-item { 
+  word-wrap: break-word;
+}

@@ -6,19 +6,20 @@ class Summary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      summary: this.getSummary()
+      summary: []
     };
 
     this.getSummary = this.getSummary.bind(this);
     this.getListStyle = this.getListStyle.bind(this);
+    this.getSummary();
   }
 
   getSummary() {
     Client.getSummary(function(res, err) {
-      if (err) { return; }
+      if (err) { return { summary: [] }; }
 
       this.setState(function() {
-        return { summary: res }
+        return { summary: res || [] }
       });
     }.bind(this));
   }

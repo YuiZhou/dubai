@@ -1,27 +1,58 @@
+const azure = require('azure-storage');
+
 function AzureTable() {
-  this.list = [];
+  this.tableName = 'travel';
+  this.table = azure.createTableService(process.env['azure_table_connection_string']);
 }
 
 AzureTable.prototype.getAll = function (callback) {
-  // this.tableService.queryEntities(this.tableName, new azure.TableQuery(), null, function(err, result, response) {
+  this.table.queryEntities(this.tableName, new azure.TableQuery(), null, function(err, result, response) {
+    if (err) {
+          callback(null, err);
+          return;
+    }
 
-  // });
-  callback(this.list);
+    var items = [];
+    for (var i = 0; i < result.entries.length; i++) {
+      items.push(JSON.parse(result.entries[i].message['_']));
+    }
+
+    callback(items);
+  });
 }
 
 AzureTable.prototype.edit = function (item, callback) {
-  for (var i = 0; i < this.list.length; i++) {
-    if (this.list[i].id === item.id) {
-      this.list.splice(i, 1, item);
-      callback();
+  var task = {
+    PartitionKey: { '_': 'dubai' },
+    RowKey: { '_': item.id },
+    message: { '_': JSON.stringify(item) }
+  }
+
+  this.table.replaceEntity(this.tableName, task, function (err, result, response) {
+    if (err) {
+      callback(null, err);
       return;
     }
-  }
+
+    callback(result);
+  });
 }
 
 AzureTable.prototype.create = function (item, callback) {
-  this.list.push(item);
-  callback();
+  var task = {
+    PartitionKey: { '_': 'dubai' },
+    RowKey: { '_': item.id },
+    message: { '_': JSON.stringify(item) }
+  }
+
+  this.table.insertEntity(this.tableName, task, function (err, result, response) {
+    if (err) {
+      callback(null, err);
+      return;
+    }
+
+    callback(result);
+  });
 }
 
 module.exports = AzureTable;

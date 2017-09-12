@@ -45,8 +45,6 @@ var getList = function (callback) {
 
       this.list = result;
 
-      console.log(JSON.stringify(result));
-
       callback();
     }.bind(this));
   } else {
@@ -70,11 +68,13 @@ ItemList.prototype.edit = function (item, callback) {
   this.table.edit(item, callback);
 }
 
-ItemList.prototype.summary = function (callback) {
+ItemList.prototype.computeSummary = function (callback) {
   getList(function (err) {
     if (err) {
       callback(null, err);
     }
+
+    callback([]);
 
     // todo
   });
