@@ -21,7 +21,7 @@ ReactDOM.render(
       <Route path="/summary" component={Summary} />
       <Route path="/my" component={My} />
       <Route path="/add" component={Add} />
-      <Route path="/edit/:item" component={Edit}/>      
+      <Route path="/edit" component={Edit}/>      
       <Route path="/login" component={Login}/>      
       <Route path="/" component={Home} />
     </Switch>

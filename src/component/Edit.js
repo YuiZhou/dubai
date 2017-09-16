@@ -2,6 +2,7 @@ import React from 'react';
 import BaseComponent from './BaseComponent.js';
 import Item from './Item';
 import Client from '../client/client.js';
+import querystring from 'querystring';
 
 class Edit extends BaseComponent {
   constructor(props) {
@@ -17,7 +18,8 @@ class Edit extends BaseComponent {
   }
 
   render() {
-    const item = JSON.parse(this.props.match.params.item);
+    const queries = querystring.parse(this.props.location.search.substr(1));
+    const item = JSON.parse(queries['item']) || {};
     return (
       <Item
         button="确定更改这一笔记账"
