@@ -9,6 +9,7 @@ class FinanceList extends Component {
     super(props);
     this.getItemInstance = this.getItemInstance.bind(this);
     this.getMyCost = this.getMyCost.bind(this);
+    this.processList = this.processList.bind(this);
   }
 
   getItemInstance(item, i) {
@@ -35,26 +36,50 @@ class FinanceList extends Component {
   }
 
   getMyCost(item) {
-    var cost = Member.getMyCost(item, Finance.getRMB(item));
-    console.log(cost);
-    if (cost === 0) {
-      return;
-    } else {
-      return (<span className={(cost > 0 ? 'text-success' : 'text-danger') + ' pull-right'}>{cost} CNY</span>);
+    var cost = item.myCost;
+    var costInstance = cost ? (<span className='text-success'>{cost} CNY</span>) : '';
+    var balance = item.myBalance;
+    var balanceInstance = balance ? (<span className={(balance > 0 ?  'text-success' : 'text-danger')}>({balance} CNY)</span>) : '';
+    return (<span className='pull-right'>{costInstance}{balanceInstance}</span>);
+  }
+
+  processList(list) {
+    var totalCost = 0;
+    var result = [];
+
+    for (var i = 0; i < list.length; i++) {
+      var item = list[i];
+      var itemCost = Finance.getRMB(item);
+      var myCost = Member.getMyCost(item, itemCost);
+      var myBalance = Member.getMyBalance(item, itemCost);
+      totalCost += myCost;
+      result.push(Object.assign(item, {
+        myCost: myCost,
+        myBalance: myBalance
+      }));
+    }
+
+    return {
+      totalCost: totalCost,
+      list: list
     }
   }
 
 
   render() {
-    const {list} = this.props;
+    const { list } = this.props;
+    const costSummary = this.processList(list);
     return (
-      <ListGroup className="finance-list">
-        {
-          list.map(function(item, i){
-            return this.getItemInstance(item, i);
-          }.bind(this))
-        }
-      </ListGroup>
+      <div>
+        <div className='alert alert-info'>你总共花费了{costSummary.totalCost}CNY</div>
+        <ListGroup className='finance-list'>
+          {
+            costSummary.list.map(function(item, i){
+              return this.getItemInstance(item, i);
+            }.bind(this))
+          }
+        </ListGroup>
+      </div>
     );
   }
 }

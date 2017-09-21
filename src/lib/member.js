@@ -22,10 +22,18 @@ class Member {
 
   static getMyCost(item, totalCost) {
     var user = Member.getUser();
+    console.log(JSON.stringify(item));
+    if (item.involve.indexOf(user) < 0) { return 0; }
+
+    return totalCost / item.involve.length;
+  }
+
+  static getMyBalance(item, totalCost) {
+    var user = Member.getUser();
     if (user !== item.spend && item.involve.indexOf(user) < 0) { return 0;}
 
     var myDebt = 0;
-    if (item.involve.indexOf(user) > 0) {
+    if (item.involve.indexOf(user) >= 0) {
       myDebt = totalCost / item.involve.length;
     }
 
