@@ -30,7 +30,7 @@ class FinanceList extends Component {
         <ListGroupItem key={i} href={'./edit?item=' + JSON.stringify(item)}>
           <p>{this.getMyCost(item)}<span className="bold">{item.title}</span></p>
           <p><span>{getNumber()} ({Finance.getRMB(item)}CNY)</span><span className="pull-right">参与者： {getMembers()}</span></p>
-          <p>{item.date}</p>
+          <p><span>{item.date}</span></p>
         </ListGroupItem>
     );    
   }
